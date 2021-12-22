@@ -1,6 +1,8 @@
+require('dotenv').config()
+
 module.exports = {
-  transpileDependencies: 'vuetify',
+  transpileDependencies: ['vuetify'],
   devServer: {
-    proxy: 'http://localhost:7000/',
+    proxy: process.env.BASE_URL,
   }
 }
