@@ -3,8 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import VueFuse from 'vue-fuse'
 
 Vue.config.productionTip = false
+
+Vue.use(VueFuse)
 
 new Vue({
   router,
