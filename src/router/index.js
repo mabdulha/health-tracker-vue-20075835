@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Exercise from '../views/Exercise.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     component: () => 
       import('../views/Exercises.vue')
   },
+  {
+    path: "/exercises/:id/view",
+    name: "exercise-view",
+    component: Exercise
+  }
 ]
 
 const router = new VueRouter({
