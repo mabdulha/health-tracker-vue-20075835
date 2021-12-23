@@ -12,7 +12,7 @@ stages:
 
 bundle:
   stage: build
-  image: node:latest
+  image: node:10.15.3
   script:
     - npm install --progress=false
     - npm run build
