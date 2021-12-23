@@ -23,9 +23,10 @@ install_dependencies:
       paths:
         - node_modules/
 
-Build_and_Test:
+bundle:
   stage: build
-  before_script:
-     - npm run clean
   script:
-    - npm run compile:all
+     - npm run build
+  artifacts:
+    paths:
+      - dist/
