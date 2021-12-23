@@ -4,22 +4,17 @@ cache:
 
 # Pipeline:
 stages:
-  - install
   - build
   - deploy
 
 
 # Jobs:
 
-install_dependencies:
-      stage: install
-      image: node:latest
-      script:
-        - npm install
-
 bundle:
   stage: build
+  image: node:latest
   script:
+    - npm install
     - npm run build
   artifacts:
     paths:
