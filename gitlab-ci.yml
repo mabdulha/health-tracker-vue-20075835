@@ -18,7 +18,7 @@ bundle:
     - npm run build
   artifacts:
     paths:
-    - dist/
+     - dist/
 
 deploy_staging:
   only:
