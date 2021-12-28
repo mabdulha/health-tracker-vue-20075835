@@ -7,20 +7,16 @@ cache:
 
 # Pipeline:
 stages:
-  - install
   - build
   - deploy
 
 # Jobs:
 
-install_dependencies:
-      stage: install
-      script:
-        - npm install
-
 bundle:
   stage: build
+  image: node:10.15.3
   script:
+    - npm install --progress=false
     - npm run build
   artifacts:
     paths:
