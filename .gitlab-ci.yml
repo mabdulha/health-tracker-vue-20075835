@@ -1,20 +1,26 @@
+# Node docker image on which this would be run
+image: node:latest
+
 cache:
   paths: 
     - node_modules/
 
 # Pipeline:
 stages:
+  - install
   - build
   - deploy
 
-
 # Jobs:
+
+install_dependencies:
+      stage: install
+      script:
+        - npm install
 
 bundle:
   stage: build
-  image: node:10.15.3
   script:
-    - npm install --progress=false
     - npm run build
   artifacts:
     paths:
@@ -25,12 +31,9 @@ deploy_staging:
     - develop
     - master
   stage: deploy
-  image: "ruby:2.5"
+  before_script:
+    - npm install -g surge
   script:
-    # install dpl:
-    - apt-get update -qy
-    - apt-get install rubygems ruby-dev -y
-    - gem install dpl
-    # deploy to heroku:
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY --skip_cleanup
+    - cp CNAME dist
+    - surge dist
     - echo "Deployed to staging server"
