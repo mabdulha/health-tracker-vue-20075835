@@ -12,7 +12,7 @@ export default {
     return Api().get('/users/count')
   },
   updateUser (id, user) {
-    return Api().patch('', user,
+    return Api().patch(`/users/${id}`, user,
     { headers: { 'Content-Type': 'application/json' } })
   }
 
