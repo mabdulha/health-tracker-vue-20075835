@@ -73,15 +73,15 @@
           selected="Male"
           prepend-inner-icon="mdi-gender-male-female"
         />
-        <v-slider 
-        label="Age"
-        v-model="age"
-        color="cyan"
-        min="0"
-        max="100"
-        thumb-label
-        prepend-icon="mdi-baby-face-outline"
-        :rules="[numbercheck('age')]"
+        <v-slider
+          label="Age"
+          v-model="age"
+          color="cyan"
+          min="0"
+          max="100"
+          thumb-label
+          prepend-icon="mdi-baby-face-outline"
+          :rules="[numbercheck('age')]"
         />
       </v-form>
     </v-card-text>
@@ -93,43 +93,47 @@
 </template>
 
 <script>
-import AuthService from '../services/authservice'
-import jwt_decode from 'jwt-decode'
+import AuthService from "../services/authservice";
+import jwt_decode from "jwt-decode";
 
 export default {
-  data () {
+  data() {
     return {
-      inputcheck (propertyType) {
-        return v => v.trim().length > 0 || `You must provide a ${propertyType}`
+      inputcheck(propertyType) {
+        return (v) =>
+          v.trim().length > 0 || `You must provide a ${propertyType}`;
       },
-      numbercheck (propertyType) {
-        return v => v > 0 || `You must provide a valid ${propertyType}`
+      numbercheck(propertyType) {
+        return (v) => v > 0 || `You must provide a valid ${propertyType}`;
       },
-      minlen (propertyType, minlen) {
-        return v =>
+      minlen(propertyType, minlen) {
+        return (v) =>
           v.trim().length >= minlen ||
-          `${propertyType} must be atleast ${minlen} characters long`
+          `${propertyType} must be atleast ${minlen} characters long`;
       },
-      emailcheck (propertyType) {
-        return v => /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(v) || `${propertyType} must be valid`
+      emailcheck(propertyType) {
+        return (v) =>
+          /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
+            v
+          ) || `${propertyType} must be valid`;
       },
       genders: ["Male", "Female", "Other"],
-      fname: '',
-      lname: '',
-      email: '',
-      password: '',
-      cpassword: '',
+      fname: "",
+      lname: "",
+      email: "",
+      password: "",
+      cpassword: "",
       weight: null,
       height: null,
       gender: "Male",
       age: null,
       value: true,
       value2: true,
-      user: {}
-    }
+      user: {},
+    };
   },
   methods: {
-    submit () {
+    submit() {
       if (this.$refs.RegisterUserForm.validate()) {
         if (this.password == this.cpassword) {
           var user = {
@@ -140,45 +144,45 @@ export default {
             weight: this.weight,
             height: this.height,
             gender: this.gender.charAt(0),
-            age: this.age
-          }
+            age: this.age,
+          };
 
-          this.user = user
-          this.submitUser(this.user)
-
+          this.user = user;
+          this.submitUser(this.user);
         } else {
-          console.log("Please Ensure the passwords both match")
+          console.log("Please Ensure the passwords both match");
         }
       }
     },
     submitUser: function (user) {
       AuthService.registerUser(user)
-      .then(res => {
-        const credentials = {
-          email: user.email,
-          password: user.password
-        }
-        this.credentials = credentials
-        this.login(this.credentials)
-        console.log(res)
-      }).catch(err => {
-        console.log(err)
-      })
+        .then((res) => {
+          const credentials = {
+            email: user.email,
+            password: user.password,
+          };
+          this.credentials = credentials;
+          this.login(this.credentials);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     login: function (credentials) {
       AuthService.loginUser(credentials)
-        .then(res => {
-          this.token = res.data
-          var decode_token = jwt_decode(this.token)
-          this.user = decode_token.User
-          this.$store.dispatch('setToken', this.token)
-          this.$store.dispatch('setUser', this.user)
-          this.$router.push('/')
+        .then((res) => {
+          this.token = res.data;
+          var decode_token = jwt_decode(this.token);
+          this.user = decode_token.User;
+          this.$store.dispatch("setToken", this.token);
+          this.$store.dispatch("setUser", this.user);
+          this.$router.push("/");
         })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-  }
-}
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
 </script>
