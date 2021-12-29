@@ -1,11 +1,13 @@
 <template>
-  <h1>Homepage</h1>
+  <home-dashboard />
 </template>
 
 <script>
-  export default {
-    name: 'Home',
-    components: {
-    },
-  }
+import HomeDashboard from '../components/HomeDashboard.vue'
+export default {
+  name: 'Home',
+  components: {
+    HomeDashboard
+  },
+}
 </script>

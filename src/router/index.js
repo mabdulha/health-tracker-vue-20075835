@@ -46,6 +46,24 @@ const routes = [
       import('../views/Exercises.vue')
   },
   {
+    path: '/ingredients',
+    name: 'Ingredients',
+    component: () => 
+      import('../views/Ingredients.vue')
+  },
+  {
+    path: '/menus',
+    name: 'Menu',
+    component: () => 
+      import('../views/Menus.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => 
+      import('../views/Profile.vue')
+  },
+  {
     path: "/exercises/:id/view",
     name: "exercise-view",
     component: Exercise

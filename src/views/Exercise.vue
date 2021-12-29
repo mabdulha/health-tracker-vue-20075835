@@ -8,6 +8,7 @@
 import SingleExercise from '../components/SingleExercise.vue'
 
 export default {
+  name: 'Exercises',
   components: {
     SingleExercise
   }
