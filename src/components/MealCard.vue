@@ -7,7 +7,7 @@
             <v-row justify="center" class="mb-2">
               <div class="d-flex pa-4 rounded-lg background">
                 <h3> Can not find the meal your are looking for? </h3>
-                <menu-add />
+                <meal-add />
               </div>
             </v-row>
           </v-container>
@@ -64,11 +64,11 @@
 
 <script>
 import MealService from "../services/mealservice"
-import MenuAdd from "./MenuAdd.vue"
+import MealAdd from "./MealAdd.vue"
 
 export default {
   components: {
-    MenuAdd
+    MealAdd
   },
   data: () => ({
     show: false,
