@@ -5,8 +5,8 @@ export default {
   fetchBmiScores (id) {
     return Api().get(`/bmis/users/${id}/scores`)
   },
-  addBmi () {
-    return Api().post('/bmis')
+  addBmi (bmi) {
+    return Api().post('/bmis', bmi)
   }
 
 }
