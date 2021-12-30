@@ -6,7 +6,7 @@
           <!-- <v-img
           max-height="500px"
           contain
-          :src="item.imageurl"
+          :src="exercise.image"
           >
           </v-img> -->
           <v-card-title>

@@ -24,8 +24,8 @@ export default {
     return Api().patch(`meals/${id}`, meal,
     { headers: { 'Content-Type': 'application/json' } })
   },
-  addMeal () {
-    return Api().post('/meals')
+  addMeal (meal) {
+    return Api().post('/meals', meal)
   },
   assignIngredientsToMeals (mealid, ingredientid) {
     return Api().post(`/meals/${mealid}/ingredients/${ingredientid}/assign`)

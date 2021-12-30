@@ -5,6 +5,7 @@ import Auth from '../views/Auth.vue'
 import Login from '../components/LoginActivity.vue'
 import Register from '../components/RegisterEditActivity.vue'
 import Exercise from '../views/Exercise.vue'
+import Meal from '../views/Meal.vue'
 
 Vue.use(VueRouter)
 
@@ -52,10 +53,10 @@ const routes = [
       import('../views/Ingredients.vue')
   },
   {
-    path: '/menus',
-    name: 'Menu',
+    path: '/meals',
+    name: 'Meal',
     component: () => 
-      import('../views/Menus.vue')
+      import('../views/Meals.vue')
   },
   {
     path: '/profile',
@@ -67,6 +68,11 @@ const routes = [
     path: "/exercises/:id/view",
     name: "exercise-view",
     component: Exercise
+  },
+  {
+    path: "/meals/:id/view",
+    name: "meal-view",
+    component: Meal
   }
 ]
 
