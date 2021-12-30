@@ -11,7 +11,8 @@ export default new Vuetify({
         primary: colors.cyan.lighten2,
         navcolor: colors.cyan,
         secondary: colors.teal.lighten2,
-        accent: colors.teal.accent3
+        accent: colors.teal.accent3,
+        background: colors.cyan.lighten5
       }
     }
   }
