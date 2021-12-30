@@ -1,11 +1,14 @@
 <template>
-  <h1>Ingredients</h1>
+  <ingredients-card />
 </template>
 
 <script>
-  export default {
-    name: 'Ingredients',
-    components: {
-    },
-  }
+import IngredientsCard from '../components/IngredientsCard.vue'
+
+export default {
+  name: 'Ingredients',
+  components: {
+    IngredientsCard
+  },
+}
 </script>

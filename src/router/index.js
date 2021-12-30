@@ -52,10 +52,10 @@ const routes = [
       import('../views/Ingredients.vue')
   },
   {
-    path: '/menus',
-    name: 'Menu',
+    path: '/meals',
+    name: 'Meal',
     component: () => 
-      import('../views/Menus.vue')
+      import('../views/Meals.vue')
   },
   {
     path: '/profile',

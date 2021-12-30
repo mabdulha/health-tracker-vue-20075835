@@ -69,7 +69,7 @@ export default {
       { icon: 'mdi-weight-lifter', text: 'Exercises', route: '/exercises' },
       { icon: 'mdi-account', text: 'Users', route: '/users' },
       { icon: 'mdi-shaker', text: 'Ingredients', route: '/ingredients' },
-      { icon: 'mdi-hamburger', text: 'Menus', route: '/menus' },
+      { icon: 'mdi-hamburger', text: 'Meals', route: '/meals' },
       { icon: 'mdi-information', text: 'About', route: '/about' }
     ]
   }),
