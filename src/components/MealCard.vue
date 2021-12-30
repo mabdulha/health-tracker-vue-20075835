@@ -14,7 +14,7 @@
             <v-card-subtitle> Calories: {{ meal.calories }} </v-card-subtitle>
 
             <v-card-actions>
-              <v-btn color="cyan lighten-2" text> View </v-btn>
+              <v-btn color="cyan lighten-2" text @click="onMealView(meal.id, meal.userId)"> View </v-btn>
 
               <v-spacer></v-spacer>
 
@@ -68,6 +68,9 @@ export default {
           console.log(err);
         });
     },
+    onMealView: function (id, userid) {
+      this.$router.push(`/meals/${id}/view`)
+    }
   },
 };
 </script>
