@@ -18,6 +18,18 @@
     </v-container>
     <v-container fluid>
       <v-layout row wrap>
+        <v-flex xs12 lg12>
+          <v-container fluid>
+            <v-row justify="center" class="mb-2">
+              <div class="d-flex pa-4 rounded-lg background">
+                <h3> Can not find the exercise your are looking for? </h3>
+                <exercise-add />
+              </div>
+            </v-row>
+          </v-container>
+        </v-flex>
+      </v-layout>
+      <v-layout row wrap>
         <v-flex
           xs12
           sm6
@@ -83,8 +95,12 @@
 <script>
 import _ from "lodash"
 import ExerciseService from "../services/exerciseservice"
+import ExerciseAdd from './ExerciseAdd.vue'
 
 export default {
+  components: {
+    ExerciseAdd
+  },
   data: () => ({
     show: false,
     exercises: [],
