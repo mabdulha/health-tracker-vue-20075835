@@ -3,6 +3,6 @@ require('dotenv').config()
 
 export default() => {
   return axios.create({
-    baseURL: 'http://localhost:8080/'
+    baseURL: process.env.BASE_URL
   })
 }
