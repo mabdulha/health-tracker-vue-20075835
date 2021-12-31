@@ -8,6 +8,7 @@
             <v-container>
               <v-form ref="UserProfileForm">
                 <h1 class="text-center my-2">User Profile</h1>
+                <v-img class="mb-5" :src="user.avatar" width="200px"></v-img>
                  <v-text-field
                   outlined
                   disabled
@@ -51,7 +52,7 @@
                   max="250"
                   prepend-inner-icon="mdi-human-male-height"
                 />
-                <v-autocomplete
+                <v-text-field
                   outlined
                   disabled
                   label="Gender"
@@ -85,6 +86,7 @@
 <script>
 import UserService from '../services/userservice'
 import UserEdit from './UserEdit.vue'
+import { fb } from '../firebase'
 
 export default {
   components: {

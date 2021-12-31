@@ -41,8 +41,8 @@
           <v-container fluid>
             <v-card class="mx-auto" max-width="344">
               <v-img :src="exercise.image" height="200px">
-                <v-card-subtitle class="text-end">
-                  <v-icon class="pr-1">mdi-eye</v-icon> {{ exercise.views }}
+                <v-card-subtitle class="text-end white--text">
+                  <v-icon dark class="pr-1">mdi-eye</v-icon> {{ exercise.views }}
                 </v-card-subtitle>
               </v-img>
 
