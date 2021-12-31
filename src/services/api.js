@@ -3,6 +3,6 @@ require('dotenv').config()
 
 export default() => {
   return axios.create({
-    baseURL: process.env.BASE_URL
+    baseURL: 'https://health-tracker-rest-20075835.herokuapp.com/api'
   })
 }
