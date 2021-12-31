@@ -9,7 +9,8 @@ export default {
     return Api().get(`/users/${id}`)
   },
   fetchUserCount () {
-    return Api().get('/users/count')
+    return Api().get('/users/count',
+    { headers: {"Access-Control-Allow-Origin": "*"} })
   },
   updateUser (id, user) {
     return Api().patch(`/users/${id}`, user,
