@@ -69,6 +69,7 @@ export default {
       { icon: 'mdi-weight-lifter', text: 'Exercises', route: '/exercises' },
       { icon: 'mdi-shaker', text: 'Ingredients', route: '/ingredients' },
       { icon: 'mdi-hamburger', text: 'Meals', route: '/meals' },
+      { icon: 'mdi-calculator', text: 'BMI', route: '/bmi' }
     ]
   }),
   methods: {
