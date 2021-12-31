@@ -52,6 +52,12 @@ const routes = [
       import('../views/Meals.vue')
   },
   {
+    path: '/bmi',
+    name: 'BMI',
+    component: () => 
+      import('../views/Bmi.vue')
+  },
+  {
     path: '/profile',
     name: 'Profile',
     component: () => 
