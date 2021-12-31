@@ -7,7 +7,7 @@
       <v-card-title primary-title> Add Ingredient </v-card-title>
       <v-card-text>
         <v-form ref="AddIngredientForm">
-          <v-btn class="primary" @click="onFilePick"> Upload image </v-btn>
+          <v-btn class="primary mb-5" @click="onFilePick"> Upload image </v-btn>
           <input
             type="file"
             @change="onUploadImage"
@@ -15,7 +15,7 @@
             accept="image/*"
             ref="fileinput"
           />
-          <v-layout row>
+          <v-layout row v-if="image != ''">
             <v-flex class="pb-2" xs12 sm9>
               <img :src="image" height="150px" width="200px" class="my-7" />
             </v-flex>
