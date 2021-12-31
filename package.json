@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "postinstall": "npm run build",
-    "start": "node server.js"
+    "start:server": "cd ./dist && httpserver -p 8080 & wait-on http://localhost:8080"
   },
   "dependencies": {
     "axios": "^0.24.0",
