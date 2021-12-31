@@ -7,6 +7,7 @@
             <v-row justify="center" class="mb-2">
               <div class="d-flex pa-4 rounded-lg background">
                 <h3>Can not find the ingredient you are looking for?</h3>
+                <ingredient-add />
               </div>
             </v-row>
           </v-container>
@@ -32,12 +33,12 @@
               <v-card-text>
                   <h3>Nutrition Information</h3>
                   <ul>
-                    <li>Energy: {{ ingredient.energy }} </li>
+                    <li>Energy: {{ ingredient.energy }} g</li>
                     <li>Calories: {{ ingredient.calories }} </li>
-                    <li>Protein: {{ ingredient.protein }} </li>
-                    <li>Fat: {{ ingredient.fat }} </li>
-                    <li>Carbs: {{ ingredient.carbs }} </li>
-                    <li>Sodium: {{ ingredient.sodium }} </li>
+                    <li>Protein: {{ ingredient.protein }} g</li>
+                    <li>Fat: {{ ingredient.fat }} g</li>
+                    <li>Carbs: {{ ingredient.carbs }} g</li>
+                    <li>Sodium: {{ ingredient.sodium }} mg</li>
                   </ul>
               </v-card-text>
             </v-card>
@@ -49,13 +50,19 @@
 </template>
 
 <script>
-import IngredientsService from "../services/ingredientservice";
+import IngredientsService from "../services/ingredientservice"
+import IngredientAdd from './IngredientAdd.vue'
 
 export default {
-  data: () => ({
-    show: false,
-    ingredients: [],
-  }),
+  components: {
+    IngredientAdd
+  },
+  data () {
+    return {
+      show: false,
+      ingredients: [],
+    }
+  },
   created() {
     this.loadIngredients();
   },
