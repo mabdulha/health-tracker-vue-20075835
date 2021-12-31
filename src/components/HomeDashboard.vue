@@ -30,7 +30,7 @@
                         </v-btn>
                       </div>
                       <v-list-item-title class="headline mb-1 white--text">
-                        Current Users
+                        Current # of Users
                       </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
@@ -57,7 +57,7 @@
                         </v-btn>
                       </div>
                       <v-list-item-title class="headline mb-1 white--text">
-                        Current Exercises
+                        Current # of Exercises
                       </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
@@ -86,7 +86,7 @@
                         </v-btn>
                       </div>
                       <v-list-item-title class="headline mb-1 white--text">
-                        Current Meals
+                        Current # of Meals
                       </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
@@ -113,7 +113,7 @@
                         </v-btn>
                       </div>
                       <v-list-item-title class="headline mb-1 white--text">
-                        Current Users
+                        Current # of Ingredients
                       </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>

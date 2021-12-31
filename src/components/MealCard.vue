@@ -45,11 +45,12 @@
                   <v-card-text>
                     <h3>Nutrition Information</h3>
                     <ul>
-                      <li> Energy: {{ meal.energy }} </li>
-                      <li> Carbs: {{ meal.carbs }} </li>
-                      <li> Sodium: {{ meal.sodium }} </li>
-                      <li> Fat: {{ meal.fat }} </li>
-                      <li> Protein: {{ meal.protein }} </li>
+                      <li> Energy: {{ meal.energy }} g</li>
+                      <li> Carbs: {{ meal.carbs }} g</li>
+                      <li> Sodium: {{ meal.sodium }} mg</li>
+                      <li> Fat: {{ meal.fat }} g</li>
+                      <li> Protein: {{ meal.protein }} g</li>
+                      <li> Calories: {{ meal.calories }} </li>
                     </ul>
                   </v-card-text>
                 </div>
