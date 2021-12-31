@@ -151,7 +151,8 @@ export default {
     };
   },
   mounted() {
-    this.getDashboardData();
+    this.getDashboardData()
+    this.getBmiScores(this.userid)
   },
   methods: {
     getDashboardData() {
@@ -159,7 +160,6 @@ export default {
       this.getExerciseCount();
       this.getMealCount();
       this.getIngredientCount();
-      this.getBmiScores(this.userid);
     },
     getUserCount() {
       UserService.fetchUserCount()

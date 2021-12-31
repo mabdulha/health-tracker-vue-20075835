@@ -20,24 +20,24 @@
             />
             <v-layout row>
               <v-flex class="pb-2" xs12 sm9>
-                <img :src="editedImage" height="150px" width="200px" class="my-7" />
+                <img :src="exercise.image" height="150px" width="200px" class="my-7" />
               </v-flex>
             </v-layout>
             <v-text-field
               outlined
-              v-model="editedName"
+              v-model="exercise.name"
               label="Name"
               :rules="[inputcheck('Name'), minlen('Name', 3)]"
             />
             <v-text-field
               outlined
-              v-model="editedDescription"
+              v-model="exercise.description"
               label="Description"
               :rules="[inputcheck('Description'), minlen('Description', 3)]"
             />
             <v-text-field
               outlined
-              v-model="editedMuscle"
+              v-model="exercise.muscle"
               label="Target Muscle"
               :rules="[inputcheck('Target Muscle'), minlen('Target Muscle', 3)]"
             />
@@ -45,7 +45,7 @@
               outlined
               type="number"
               suffix="calories"
-              v-model="editedCalories"
+              v-model="exercise.calories"
               label="Calories Burnt"
               :rules="[inputcheck('Calories Burnt')]"
             />
@@ -53,7 +53,7 @@
               outlined
               type="number"
               suffix="mins"
-              v-model="editedDuration"
+              v-model="exercise.duration"
               label="Duration"
               :rules="[inputcheck('Duration')]"
             />
@@ -84,13 +84,7 @@ export default {
           v.length >= minlen ||
           `${propertyType} must be atleast ${minlen} characters long`;
       },
-      dialog: false,
-      editedImage: this.exercise.image,
-      editedName: this.exercise.name,
-      editedDescription: this.exercise.description,
-      editedMuscle: this.exercise.muscle,
-      editedCalories: this.exercise.calories,
-      editedDuration: this.exercise.duration
+      dialog: false
     };
   },
   methods: {
@@ -116,30 +110,27 @@ export default {
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             console.log("image url = " + downloadURL);
-            this.editedImage = downloadURL.toString();
-            console.log(this.editedImage);
+            this.exercise.image = downloadURL.toString();
+            console.log(this.exercise.image);
           });
         }
       );
     },
     submit() {
       if (this.$refs.EditExerciseForm.validate()) {
-        if (this.editedImage.length === 0) {
-          this.editedImage =
-            "https://www.happyeater.com/images/default-food-image.jpg";
+        var exerciseEdit = {
+          name: this.exercise.name,
+          image: this.exercise.image,
+          description: this.exercise.description,
+          calories: this.exercise.calories,
+          muscle: this.exercise.muscle,
+          duration: this.exercise.duration
         }
-        var exercise = {
-          name: this.editedName,
-          image: this.editedImage,
-          description: this.editedDescription,
-          calories: this.editedCalories,
-          muscle: this.editedMuscle,
-          duration: this.editedDuration
-        };
-        this.exercise = exercise;
-        console.log(exercise);
+        // this.exercise = exerciseEdit;
       }
       this.updateExercise(this.exerciseid, this.exercise);
+      console.log(this.exerciseid)
+      console.log('exercise: ' + this.exercise)
       this.dialog = false;
     },
     updateExercise(id, exercise) {

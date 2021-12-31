@@ -11,6 +11,19 @@
       </v-card-title>
       <v-card-text>
         <v-form ref="UpdateUserForm">
+           <v-btn class="primary" @click="onFilePick"> Upload image </v-btn>
+            <input
+              type="file"
+              @change="onUploadImage"
+              style="display: none"
+              accept="image/*"
+              ref="fileinput"
+            />
+            <v-layout row>
+              <v-flex class="pb-2" xs12 sm9>
+                <img :src="user.avatar" height="150px" width="200px" class="my-7" />
+              </v-flex>
+            </v-layout>
           <v-text-field
           outlined
           label="First Name"
@@ -104,6 +117,7 @@
 
 <script>
 import UserService from '../services/userservice'
+import { fb } from '../firebase'
 
 export default {
   props: ['user', 'userid'],
@@ -136,10 +150,39 @@ export default {
     }
   },
   methods: {
+    onFilePick() {
+      this.$refs.fileinput.click();
+    },
+    onUploadImage(e) {
+      let file = e.target.files[0];
+      console.log(file);
+      let d = new Date();
+
+      var storageRef = fb
+        .storage()
+        .ref("users/" + d.getTime() + "-" + file.name);
+      let uploadTask = storageRef.put(file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            console.log("image url = " + downloadURL);
+            this.user.avatar = downloadURL.toString();
+            console.log(this.user.avatar);
+          });
+        }
+      );
+    },
     submit() {
       if (this.$refs.UpdateUserForm.validate()) {
         if (this.password == this.cpassword) {
           var user = {
+            avatar: this.user.avatar,
             fname: this.user.fname,
             lname: this.user.lname,
             email: this.user.email,

@@ -3,16 +3,16 @@
     <v-card-text>
       <v-form ref="RegisterUserForm">
         <v-btn class="primary mb-5" @click="onFilePick">
-            Upload image
+            Upload avatar
           </v-btn>
           <input type="file" 
           @change="onUploadImage"
           style="display:none"
           accept="image/*"
           ref="fileinput" />
-          <v-layout row v-if="image != ''">
+          <v-layout row v-if="avatar != ''">
             <v-flex class="pb-2" xs12 sm9>
-              <img :src="image" height="150px" width="200px" class="my-7">
+              <img :src="avatar" height="150px" width="200px" class="my-7">
             </v-flex>
           </v-layout>
         <v-text-field
@@ -106,6 +106,7 @@
 </template>
 
 <script>
+import { fb } from '../firebase'
 import AuthService from "../services/authservice";
 import jwt_decode from "jwt-decode";
 
@@ -131,7 +132,7 @@ export default {
           ) || `${propertyType} must be valid`;
       },
       genders: ["Male", "Female", "Other"],
-      image: "",
+      avatar: "",
       fname: "",
       lname: "",
       email: "",
@@ -165,8 +166,8 @@ export default {
       }, () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
         console.log('image url = ' + downloadURL)
-        this.image = downloadURL.toString()
-        console.log(this.image)
+        this.avatar = downloadURL.toString()
+        console.log(this.avatar)
       })
       })
     },
@@ -174,7 +175,7 @@ export default {
       if (this.$refs.RegisterUserForm.validate()) {
         if (this.password == this.cpassword) {
           var user = {
-            image: this.image,
+            avatar: this.avatar,
             fname: this.fname,
             lname: this.lname,
             email: this.email,
