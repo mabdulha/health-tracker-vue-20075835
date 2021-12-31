@@ -2,6 +2,19 @@
   <v-container>
     <v-card-text>
       <v-form ref="RegisterUserForm">
+        <v-btn class="primary mb-5" @click="onFilePick">
+            Upload image
+          </v-btn>
+          <input type="file" 
+          @change="onUploadImage"
+          style="display:none"
+          accept="image/*"
+          ref="fileinput" />
+          <v-layout row v-if="image != ''">
+            <v-flex class="pb-2" xs12 sm9>
+              <img :src="image" height="150px" width="200px" class="my-7">
+            </v-flex>
+          </v-layout>
         <v-text-field
           outlined
           label="First Name"
@@ -118,6 +131,7 @@ export default {
           ) || `${propertyType} must be valid`;
       },
       genders: ["Male", "Female", "Other"],
+      image: "",
       fname: "",
       lname: "",
       email: "",
@@ -133,10 +147,34 @@ export default {
     };
   },
   methods: {
+    onFilePick () {
+      this.$refs.fileinput.click()
+    },
+    onUploadImage (e) {
+      let file = e.target.files[0]
+      console.log(file)
+      let d = new Date() 
+
+      var storageRef = fb.storage().ref('users/' + d.getTime() + '-' + file.name)
+      let uploadTask = storageRef.put(file)
+
+      uploadTask.on('state_changed', (snapshot) => {
+
+      }, (err) => {
+        console.log(err)
+      }, () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        console.log('image url = ' + downloadURL)
+        this.image = downloadURL.toString()
+        console.log(this.image)
+      })
+      })
+    },
     submit() {
       if (this.$refs.RegisterUserForm.validate()) {
         if (this.password == this.cpassword) {
           var user = {
+            image: this.image,
             fname: this.fname,
             lname: this.lname,
             email: this.email,
@@ -144,7 +182,7 @@ export default {
             weight: this.weight,
             height: this.height,
             gender: this.gender.charAt(0),
-            age: this.age,
+            age: this.age
           };
 
           this.user = user;

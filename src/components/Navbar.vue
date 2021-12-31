@@ -65,12 +65,10 @@ export default {
     ],
     links: [
       { icon: 'mdi-home', text: 'Home', route: '/' },
-      { icon: 'mdi-profile', text: 'Profile', route: '/profile' },
+      { icon: 'mdi-account', text: 'Profile', route: '/profile' },
       { icon: 'mdi-weight-lifter', text: 'Exercises', route: '/exercises' },
-      { icon: 'mdi-account', text: 'Users', route: '/users' },
       { icon: 'mdi-shaker', text: 'Ingredients', route: '/ingredients' },
       { icon: 'mdi-hamburger', text: 'Meals', route: '/meals' },
-      { icon: 'mdi-information', text: 'About', route: '/about' }
     ]
   }),
   methods: {

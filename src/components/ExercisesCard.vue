@@ -22,7 +22,7 @@
           <v-container fluid>
             <v-row justify="center" class="mb-2">
               <div class="d-flex pa-4 rounded-lg background">
-                <h3>Can not find the exercise your are looking for?</h3>
+                <h3>Can not find the exercise you are looking for?</h3>
                 <exercise-add />
               </div>
             </v-row>
