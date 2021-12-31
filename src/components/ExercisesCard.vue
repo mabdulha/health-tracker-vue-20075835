@@ -22,7 +22,7 @@
           <v-container fluid>
             <v-row justify="center" class="mb-2">
               <div class="d-flex pa-4 rounded-lg background">
-                <h3> Can not find the exercise your are looking for? </h3>
+                <h3>Can not find the exercise your are looking for?</h3>
                 <exercise-add />
               </div>
             </v-row>
@@ -40,10 +40,7 @@
         >
           <v-container fluid>
             <v-card class="mx-auto" max-width="344">
-              <v-img
-                :src="exercise.image"
-                height="200px"
-              >
+              <v-img :src="exercise.image" height="200px">
                 <v-card-subtitle class="text-end">
                   <v-icon class="pr-1">mdi-eye</v-icon> {{ exercise.views }}
                 </v-card-subtitle>
@@ -65,25 +62,17 @@
                 >
                   View
                 </v-btn>
-
                 <v-spacer></v-spacer>
-
-                <v-btn icon @click="show = !show">
-                  <v-icon>{{
-                    show ? "mdi-chevron-up" : "mdi-chevron-down"
-                  }}</v-icon>
-                </v-btn>
-              </v-card-actions>
-
-              <v-expand-transition>
-                <div v-show="show">
-                  <v-divider></v-divider>
-
-                  <v-card-text>
-                    {{ exercise.description }}
-                  </v-card-text>
+                <div class="d-flex" v-if="exercise.userId === userid">
+                  <exercise-edit
+                    :exercise="exercise"
+                    :exerciseid="exercise.id"
+                  />
+                  <v-btn @click="onExerciseDelete(exercise.id)" icon color="red"
+                    ><v-icon>mdi-delete</v-icon></v-btn
+                  >
                 </div>
-              </v-expand-transition>
+              </v-card-actions>
             </v-card>
           </v-container>
         </v-flex>
@@ -93,20 +82,25 @@
 </template>
 
 <script>
-import _ from "lodash"
-import ExerciseService from "../services/exerciseservice"
-import ExerciseAdd from './ExerciseAdd.vue'
+import _ from "lodash";
+import ExerciseService from "../services/exerciseservice";
+import ExerciseAdd from "./ExerciseAdd.vue";
+import ExerciseEdit from "./ExerciseEdit.vue";
 
 export default {
   components: {
-    ExerciseAdd
+    ExerciseAdd,
+    ExerciseEdit,
   },
-  data: () => ({
-    show: false,
-    exercises: [],
-    results: [],
-    threshold: 0.3,
-  }),
+  data() {
+    return {
+      show: false,
+      exercises: [],
+      results: [],
+      threshold: 0.3,
+      userid: this.$store.state.user.id,
+    };
+  },
   created() {
     this.loadExercises();
   },
@@ -146,6 +140,48 @@ export default {
             console.log(err);
           });
       }
+    },
+    onExerciseDelete(id) {
+      this.$swal
+        .fire({
+          title: "Are you totally sure?",
+          text: "You can't Undo this action",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "OK Delete it",
+          cancelButtonText: "Cancel",
+          showCloseButton: true,
+          showLoaderOnConfirm: true,
+        })
+        .then((result) => {
+          console.log("SWAL Result : " + result);
+          console.log(id);
+          if (result.value) {
+            ExerciseService.deleteExercise(id)
+              .then((response) => {
+                console.log(response);
+                this.loadExercises();
+                this.$swal(
+                  "Deleted",
+                  "You have successfully deleted this Exercise",
+                  "success"
+                );
+                const exerciseindex = this.exercises.findIndex(
+                  (i) => i._id === id
+                );
+                this.exercises.splice(exerciseindex, 1);
+              })
+              .catch((error) => {
+                this.$swal(
+                  "ERROR",
+                  "Something went wrong while deleting, Please try again"
+                );
+                console.log(error);
+              });
+          } else {
+            this.$swal("Cancelled", "Cound not delete exercise!", "info");
+          }
+        });
     },
   },
   computed: {

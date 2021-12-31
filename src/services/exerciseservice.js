@@ -18,10 +18,10 @@ export default {
     return Api().get(`/users/${id}/exercises`)
   },
   addExercise (exercise) {
-    return Api().post('/exercise', exercise)
+    return Api().post('/exercises', exercise)
   },
   updateExercise (id, exercise) {
-    return Api().patch(`/exercise/${id}`, exercise,
+    return Api().patch(`/exercises/${id}`, exercise,
     { headers: { 'Content-Type': 'application/json' } })
   },
   deleteExercise (id) {
