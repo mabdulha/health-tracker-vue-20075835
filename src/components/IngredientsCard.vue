@@ -1,103 +1,75 @@
 <template>
-  <v-card
-    :loading="loading"
-    class="mx-auto my-12"
-    max-width="374"
-  >
-    <template slot="progress">
-      <v-progress-linear
-        color="deep-purple"
-        height="10"
-        indeterminate
-      ></v-progress-linear>
-    </template>
+  <v-main>
+    <v-container fluid>
+      <v-layout row wrap>
+        <v-flex xs12 lg12>
+          <v-container fluid>
+            <v-row justify="center" class="mb-2">
+              <div class="d-flex pa-4 rounded-lg background">
+                <h3>Can not find the ingredient you are looking for?</h3>
+              </div>
+            </v-row>
+          </v-container>
+        </v-flex>
+      </v-layout>
+      <v-layout row wrap>
+        <v-flex
+          xs12
+          sm6
+          md4
+          lg2
+          v-for="ingredient in ingredients"
+          :key="ingredient.id"
+        >
+          <v-container fluid>
+            <v-card class="mx-auto my-12" max-width="374">
+              <v-img height="250" :src="ingredient.image"></v-img>
 
-    <v-img
-      height="250"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-    ></v-img>
+              <v-card-title> {{ ingredient.name }} </v-card-title>
 
-    <v-card-title>Cafe Badilico</v-card-title>
+              <v-divider class="mx-4"></v-divider>
 
-    <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <v-rating
-          :value="4.5"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating>
-
-        <div class="grey--text ms-4">
-          4.5 (413)
-        </div>
-      </v-row>
-
-      <div class="my-4 text-subtitle-1">
-        $ • Italian, Cafe
-      </div>
-
-      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-    </v-card-text>
-
-    <v-divider class="mx-4"></v-divider>
-
-    <v-card-title>Tonight's availability</v-card-title>
-
-    <v-card-text>
-      <v-chip-group
-        v-model="selection"
-        active-class="deep-purple accent-4 white--text"
-        column
-      >
-        <v-chip>5:30PM</v-chip>
-
-        <v-chip>7:30PM</v-chip>
-
-        <v-chip>8:00PM</v-chip>
-
-        <v-chip>9:00PM</v-chip>
-      </v-chip-group>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn
-        color="deep-purple lighten-2"
-        text
-        @click="reserve"
-      >
-        Reserve
-      </v-btn>
-      <p> {{ ingredients }} </p>
-    </v-card-actions>
-  </v-card>
+              <v-card-text>
+                  <h3>Nutrition Information</h3>
+                  <ul>
+                    <li>Energy: {{ ingredient.energy }} </li>
+                    <li>Calories: {{ ingredient.calories }} </li>
+                    <li>Protein: {{ ingredient.protein }} </li>
+                    <li>Fat: {{ ingredient.fat }} </li>
+                    <li>Carbs: {{ ingredient.carbs }} </li>
+                    <li>Sodium: {{ ingredient.sodium }} </li>
+                  </ul>
+              </v-card-text>
+            </v-card>
+          </v-container>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-main>
 </template>
 
 <script>
-import IngredientsService from '../services/ingredientservice'
+import IngredientsService from "../services/ingredientservice";
 
 export default {
   data: () => ({
     show: false,
-    ingredients: []
+    ingredients: [],
   }),
-  created () {
-    this.loadIngredients()
+  created() {
+    this.loadIngredients();
   },
   methods: {
     loadIngredients: function () {
-      IngredientsService.fetchIngredients().then((result) => {
-        this.ingredients = result.data
-        console.log(this.ingredients)
-      }).catch((err) => {
-        console.log(err)
-      });
-    }
-  }
-}
+      IngredientsService.fetchIngredients()
+        .then((result) => {
+          this.ingredients = result.data;
+          console.log(this.ingredients);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
 </script>

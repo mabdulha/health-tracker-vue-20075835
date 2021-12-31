@@ -6,7 +6,7 @@
           <v-container fluid>
             <v-row justify="center" class="mb-2">
               <div class="d-flex pa-4 rounded-lg background">
-                <h3> Can not find the meal your are looking for? </h3>
+                <h3> Can not find the meal you are looking for? </h3>
                 <meal-add />
               </div>
             </v-row>
